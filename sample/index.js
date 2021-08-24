@@ -1,8 +1,16 @@
 setTimeout(() => {
-  console.log("setTimeout()");
+  console.log("setTimeout()");  // 実行順4番: 0.1秒遅延しているため
 }, 100);
 
-console.log("global"); // settimeoutが後から実行される
+setImmediate(() => {
+  console.log("setImmediate()"); // 実行順3番: キューの後の優先となるため
+});
 
-var end = (new Date()).getTime() + 3000;  // 3秒間遅延させる。
-while ((new Date()).getTime() < end) { }
+process.nextTick(() => {
+  console.log("nextTick()");  // 実行順1番:キューが優先されるため
+});
+
+Promise.resolve().then(() => {
+  console.log("Promise.resolve().then()"); // 実行順2番:キューが優先されるため
+});
+
