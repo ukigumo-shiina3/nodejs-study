@@ -1,14 +1,30 @@
-// 環境変数
-for (var i = 0; process.argv.length; i++) {
-    console.log(`{i} : ${process.argv[i]}`);
-}
-
-// 実行時引数
-console.log(JSON.stringify(process.env, null, 2));
-
-// カレントディレクトリ
-console.log(`cwd() : ${process.cwd()}`);
-console.log(`dirname: ${__dirname}`);
-
-// 実行環境
-console.log(process.platform);
+// 親クラスの定義
+var Car = class {
+    constructor(name) {
+      this.name = name;
+    }
+  
+    drive() {
+      console.log('zoom zoom ...');
+    }
+  };
+  
+  // 子クラスの定義
+  var Lamborghini = class extends Car {
+    constructor(name) {
+      super(name);
+    }
+  
+    echo() {
+      super.drive();
+    }
+  
+    drive() {
+      console.log(`fire ${this.name} !!`);
+    }
+  };
+  
+  var car = new Lamborghini('lamborghini');
+  car.echo();
+  car.drive();
+  
