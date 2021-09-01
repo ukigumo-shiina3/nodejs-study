@@ -1,5 +1,10 @@
-var a = require("./lib/module-a/index");
-var b = require("./lib/module-b/index");
-
-a();
-b();
+var Clock = require("./clock");
+var i = 0;
+var clock = new Clock();
+clock.on("tick", () => {
+  console.log(++i);
+  if (i > 3) {
+    clock.stop();
+  }
+});
+clock.start();
